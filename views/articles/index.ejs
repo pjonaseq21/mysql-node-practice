@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xD</title>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+</head>
+<body>
+   <div class="container">
+    <a href="" class="nav btn btn-success">Login</a>
+
+    <h1 class="mb-4">Blog</h1>
+    <a href="articles/new" class="btn btn-success">Create Post</a>
+
+    <div class="container" id="test">
+
+        <% data.forEach(result=>{ %>
+            <div class="pojemnik">
+            <p><%= result.id %></p>
+            <p><%= result.description %></p>
+            <p><%= result.date.toLocaleString() %></p>
+            <a class="btn btn-danger" href="http://localhost:8000/remove/<%=result.id%>">Delete</a>
+            </div>
+        <%}); %> 
+
+
+    </div>
+
+   </div>
+<style>
+
+   .pojemnik{
+    text-align: center;
+    color: white;
+    border: black solid 1px;
+    width: 10%;
+    height: 15%;
+    padding: 1rem;
+    margin: 10px;
+    word-wrap: break-word;
+
+   }
+   body{
+    background-color: rgba(70, 75, 240, 0.79);
+    font-family: 'Open Sans';
+
+   }
+   #test{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+   }
+   .nav{
+    float: right;
+    text-decoration: none;
+    margin: 1rem;
+    padding-left: 10px;
+   }
+</style>
+
+
+
+
+</script>
+    
+</body>
+
+</html>
