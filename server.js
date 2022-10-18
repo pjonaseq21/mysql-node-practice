@@ -5,7 +5,7 @@ const BlogRouter = require("./routes/blog")
 const removeRouter = require("./routes/remove")
 const config = require("./db/database_test")
 let connection = mysql.createConnection(config);
-
+let loginRouter = require("./routes/login")
 /*
 let connection = mysql.createConnection(config);
 let testinsert = `INSERT INTO Sklep(id,name,region)
@@ -34,5 +34,6 @@ app.get("/articles/new",(req,res)=>{
 app.use('/articles',BlogRouter)
 
 app.use(removeRouter)
+app.use(loginRouter)
 
 app.listen(8000)
