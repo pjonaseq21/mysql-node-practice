@@ -12,20 +12,20 @@ router.get("/login",(req,res)=>{
 router.post("/login",(req,res)=>{
     const logindata =  {
         login : req.body.login,
-        email : req.body.email,
         password : req.body.password
     }
-    connection.query(`SELECT FROM USERS where email=${logindata.email}`,(err,result)=>{
+    connection.query("SELECT FROM users_data where login=? AND password=?",[logindata.login,logindata.password],(err,result)=>{
         if (err){
-            res.render("articles/login",{alert: true})
-        }else{
-
-            
             res.render("articles/login",{alert: false})
+        }else{
+            
+            
+            res.render("articles/login",{alert: true})
 
             console.log("2")
 
         }
+        res.end();
     })
 })
 module.exports = router

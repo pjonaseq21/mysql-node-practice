@@ -18,7 +18,7 @@ app.set("view engine", 'ejs')
 app.use(express.urlencoded({ extended : false}))
 
 app.get("/",(req,res) =>{
-    connection.query("SELECT * FROM Sklepik2;",(err,result)=>{
+    connection.query("SELECT * FROM users_data;",(err,result)=>{
         if (err){
            console.log("DATABASE PROBLEM")
            throw err

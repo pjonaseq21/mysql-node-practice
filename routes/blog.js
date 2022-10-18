@@ -12,12 +12,11 @@ let connection = mysql.createConnection(config);
 
 router.post("/", async(req,res) =>{
     const newdata =  {
-        id : req.body.id,
-        description : req.body.description,
-        region : req.body.region
+        login : req.body.login,
+        password : req.body.password
     }
-    let testinsert = `INSERT INTO Sklepik2(description)
-                  VALUES("${newdata.description}")`;
+    let testinsert = `INSERT INTO users_data(login,password)
+                  VALUES("${newdata.login}","${newdata.password}")`;
     connection.query(testinsert,(err)=>{
         if (err){
             console.log("ERROR IN INSERTING VALUES")

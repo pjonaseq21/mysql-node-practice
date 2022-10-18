@@ -19,15 +19,18 @@
     
     <form action="/login" method="post" id="testform">
         <%- include('_login_fields.ejs') %> 
+
     </form>
-<script type="text/javascript"> 
+<script > 
+  var getTest = <%= locals.alert  %>;
+
 var form = document.getElementById("testform");
 function handleForm(event) { event.preventDefault(); } 
 form.addEventListener('submit', handleForm);
 try{
        let btn = document.querySelector("button.btn")
        btn.addEventListener("click",()=>{
-       if ("<%=locals.alert%>" === "true"){
+       if (getTest == "true"){
 
          Swal.fire(
   "You are not registred"

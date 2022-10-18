@@ -14,24 +14,12 @@
 </head>
 <body>
    <div class="container">
+    <a href="articles/new" class="nav btn btn-success">Register</a>
+
     <a href="login" class="nav btn btn-success">Login</a>
 
     <h1 class="mb-4">Blog</h1>
-    <a href="articles/new" class="btn btn-success">Create Post</a>
-
-    <div class="container" id="test">
-
-        <% data.forEach(result=>{ %>
-            <div class="pojemnik">
-            <p><%= result.id %></p>
-            <p><%= result.description %></p>
-            <p><%= result.date.toLocaleString() %></p>
-            <a class="btn btn-danger" href="http://localhost:8000/remove/<%=result.id%>">Delete</a>
-            </div>
-        <%}); %> 
-
-
-    </div>
+  
 
    </div>
 <style>
@@ -60,7 +48,7 @@
    .nav{
     float: right;
     text-decoration: none;
-    margin: 1rem;
+    margin: 0.5rem;
     padding-left: 10px;
    }
 </style>
