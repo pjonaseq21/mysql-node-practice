@@ -4,7 +4,7 @@ var mysql = require('mysql');
 let config = {
     host: "localhost",
     user: "root",
-    database : "Users"
+    database : "test"
 };
   
 module.exports = config;

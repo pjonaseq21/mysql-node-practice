@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>xD</title>
     <!-- CSS only -->
@@ -22,6 +22,7 @@
             <%- include('_login_fields.ejs') %> 
     
         </form>
+        <p style="color: red">Login or Password is invalid</p>
     </div>
 </div>
 
@@ -47,5 +48,9 @@
    }
 
 </style>
+<script>
+    swal("Nieudane logowanie");
+
+</script>
 </body>
 </html>

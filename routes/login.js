@@ -14,18 +14,18 @@ router.post("/login",(req,res)=>{
         login : req.body.login,
         password : req.body.password
     }
-    connection.query("SELECT FROM users_data where login=? AND password=?",[logindata.login,logindata.password],(err,result)=>{
-        if (err){
-            res.render("articles/login",{alert: false})
-        }else{
-            
-            
-            res.render("articles/login",{alert: true})
+    console.log(logindata.login , logindata.password)
+    console.log(typeof(logindata.login) , typeof(logindata.password))
 
-            console.log("2")
+    connection.query('SELECT * FROM users_data WHERE login=? AND password=?',[logindata.login,logindata.password],(err,result)=>{
+      if(result.length > 0){
+            res.redirect("/")
+            
 
         }
-        res.end();
+        else {
+            res.render("articles/invalidlogin")
+        }
     })
 })
 module.exports = router
