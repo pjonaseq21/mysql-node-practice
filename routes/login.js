@@ -14,11 +14,14 @@ router.post("/login",(req,res)=>{
         login : req.body.login,
         password : req.body.password
     }
-    console.log(logindata.login , logindata.password)
-    console.log(typeof(logindata.login) , typeof(logindata.password))
+    
 
     connection.query('SELECT * FROM users_data WHERE login=? AND password=?',[logindata.login,logindata.password],(err,result)=>{
       if(result.length > 0){
+            req.session.loggedin = true;
+            req.session.username = logindata.login;
+            console.log(result, "to")
+            console.log("User logged in")
             res.redirect("/")
             
 

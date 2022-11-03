@@ -6,6 +6,7 @@ const removeRouter = require("./routes/remove")
 const config = require("./db/database_test")
 let connection = mysql.createConnection(config);
 let loginRouter = require("./routes/login")
+const session = require('express-session');
 /*
 let connection = mysql.createConnection(config);
 let testinsert = `INSERT INTO Sklep(id,name,region)
@@ -13,6 +14,16 @@ let testinsert = `INSERT INTO Sklep(id,name,region)
 connection.query(testinsert)
 connection.end()
 */
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
+
+
+
+
+
 app.set("view engine", 'ejs')
 
 app.use(express.urlencoded({ extended : false}))
@@ -22,10 +33,13 @@ app.get("/",(req,res) =>{
         if (err){
            console.log("DATABASE PROBLEM")
            throw err
-       }
+       } else if (req.session.loggedin){
+        console.log("you are logged in", req.session.username)
+        res.render("articles/logged",{data: req.session.username})
+       }else{
        console.log(result)
        res.render("articles/index",{data: result});
-       
+       }
 })})
 
 app.get("/articles/new",(req,res)=>{
