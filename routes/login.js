@@ -22,7 +22,7 @@ router.post("/login",(req,res)=>{
             req.session.username = logindata.login;
             console.log(result, "to")
             console.log("User logged in")
-            res.redirect("/")
+            res.redirect("/home")
             
 
         }

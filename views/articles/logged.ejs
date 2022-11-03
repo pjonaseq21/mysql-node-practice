@@ -13,19 +13,64 @@
 
 </head>
 <body>
-    <h1>THIS IS TEST FOR AUTH  </h1>
-    <h1><%= data %> </h1>
+    
    <div class="container">
-    <a href="articles/new" class="nav btn btn-success">Register</a>
 
-    <a href="login" class="nav btn btn-success">Login</a>
+    <a href="logout" id="logout" class="nav btn btn-danger">Logout</a>
+    <p  class="nav" id="welcome-nav">Welcome <%= name %> </p>
+    <a href="post"  id="logout" class="nav btn btn-success">Post</a>
 
     <h1 class="mb-4">Blog</h1>
-  
+    
+    <div class="container" id="container-blog">
+
+       <div>
+        
+        <% data.forEach(entry=>{ %>
+            <div id="container-post">
+            <p id="title"><%= entry.title %></p>
+            <p><%= entry.text %></p>
+        </div> 
+
+              <% }) %>
+
+        </div> 
+        
+    </div>
+
+
+
 
    </div>
-<style>
 
+
+<style>
+    #logout{
+        margin: 1rem;
+    }
+    #title{
+        font-size: 3rem;
+    }
+    #container-post{
+        border: 1px black solid;
+        margin: 1rem;
+        padding: 1rem;
+    }
+    #container-blog{
+        padding: 2rem;
+        width: 80%;
+        height: auto;
+        border: 1px black solid;
+        background-color: white;
+
+    }
+    #welcome-nav{
+        font-size: 2rem;
+        margin: 1rem;
+    }
+    .nav{
+        margin:1rem;
+    }
    .pojemnik{
     text-align: center;
     color: white;
