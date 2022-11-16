@@ -1,14 +1,15 @@
 const express = require("express")
 const app = express()
 const mysql = require("mysql")
-const BlogRouter = require("./routes/blog")
-const removeRouter = require("./routes/remove")
 const config = require("./db/database_test")
 let connection = mysql.createConnection(config);
 let configsecond = require("./db/database.posts")
-
+let postRouter = require("./routes/post")
+let profileRouter = require("./routes/profile")
 let secondconnection = mysql.createConnection(configsecond)
 let loginRouter = require("./routes/login")
+const helmet = require('helmet');
+const morgan = require('morgan');
 const session = require('express-session');
 /*
 let connection = mysql.createConnection(config);
@@ -37,9 +38,11 @@ app.get("/home",(req,res)=>{
                console.log("DATABASE PROBLEM")
                throw err
            }
-           console.log(result)
-           res.render("articles/logged.ejs",{data: result,name: req.session.username});
-           }
+           console.log(req.session.UserId, 'this and that')
+           connection.query("SELECT * FROM users_data",(err,data)=>{
+         
+           res.render("articles/logged.ejs",{data: result, name: req.session.username,users: req.session.UserId});
+        }) }
     )}})
         
 app.get("/",(req,res) =>{
@@ -48,10 +51,9 @@ app.get("/",(req,res) =>{
            console.log("DATABASE PROBLEM")
            throw err
        } else if (req.session.loggedin){
-        console.log("you are logged in", req.session.username)
-        res.render("articles/logged",{data: req.session.username})
+        res.redirect("/home")
        }else{
-       res.render("articles/index",{data: result.title,name: req.session.username});
+       res.render("articles/index");
        }
 })})
 app.get("/logout",(req,res)=>{
@@ -59,16 +61,10 @@ app.get("/logout",(req,res)=>{
     res.redirect("/")
 })
 
-app.get("/post",(req,res)=>{
-    res.render("articles/post")
-})
 
-app.get("/articles/new",(req,res)=>{
-    res.render("articles/new")
-})
-app.use('/articles',BlogRouter)
+app.use(helmet());
+app.use(morgan('combined'));
 
-app.use(removeRouter)
-app.use(loginRouter)
 
+app.use(loginRouter,postRouter,profileRouter)
 app.listen(8000)

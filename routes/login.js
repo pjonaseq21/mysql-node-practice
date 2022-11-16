@@ -3,7 +3,6 @@ const router = express.Router()
 const mysql = require("mysql")
 const config2 = require("../db/users")
 let connection = mysql.createConnection(config2);
-const Swal = require('sweetalert')
 router.get("/login",(req,res)=>{
     res.render("articles/login")
 })
@@ -20,7 +19,10 @@ router.post("/login",(req,res)=>{
       if(result.length > 0){
             req.session.loggedin = true;
             req.session.username = logindata.login;
-            console.log(result, "to")
+            for (id in result){
+                req.session.UserId = id
+            }
+
             console.log("User logged in")
             res.redirect("/home")
             

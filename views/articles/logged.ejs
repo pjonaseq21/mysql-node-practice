@@ -15,13 +15,13 @@
 <body>
     
    <div class="container">
-
+    <nav class="container p-1">
     <a href="logout" id="logout" class="nav btn btn-danger">Logout</a>
-    <p  class="nav" id="welcome-nav">Welcome <%= name %> </p>
+    <a href="profile/<%= users %>"> <p  class="nav btn btn-dark" id="logout">Welcome <%= name %> </p></a>
     <a href="post"  id="logout" class="nav btn btn-success">Post</a>
 
     <h1 class="mb-4">Blog</h1>
-    
+</nav>
     <div class="container" id="container-blog">
 
        <div>
@@ -65,8 +65,7 @@
 
     }
     #welcome-nav{
-        font-size: 2rem;
-        margin: 1rem;
+        font-size: 1rem;
     }
     .nav{
         margin:1rem;
