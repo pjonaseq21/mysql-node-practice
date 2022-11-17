@@ -39,9 +39,10 @@ app.get("/home",(req,res)=>{
                throw err
            }
            console.log(req.session.UserId, 'this and that')
-           connection.query("SELECT * FROM users_data",(err,data)=>{
-         
-           res.render("articles/logged.ejs",{data: result, name: req.session.username,users: req.session.UserId});
+           secondconnection.query("SELECT * FROM categories",(err,callback)=>{
+          
+           console.log(callback)
+           res.render("articles/logged.ejs",{data: result, name: req.session.username,users: req.session.UserId,test: callback});
         }) }
     )}})
         

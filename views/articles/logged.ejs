@@ -26,8 +26,17 @@
 
        <div>
         
+        <% test.forEach(entry=>{ %>
+            <div id="container-post">
+           <a id="category-header" class="text-center" href="posts/<%= entry.id %>"> <p ><%= entry.title%></p></a>
+
+        </div> 
+
+              <% }) %>
+        
         <% data.forEach(entry=>{ %>
             <div id="container-post">
+            <p><%= entry.user_name %></p>
             <p id="title"><%= entry.title %></p>
             <p><%= entry.text %></p>
         </div> 
@@ -45,6 +54,11 @@
 
 
 <style>
+    #category-header{
+        font-size: 2rem;
+        text-decoration: none;
+        color: black;
+    }
     #logout{
         margin: 1rem;
     }

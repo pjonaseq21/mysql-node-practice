@@ -14,7 +14,7 @@ router.post("/post",(req,res,err)=>{
         title : req.body.title,
         text : req.body.text
     }
-    connection.query(`INSERT INTO posts_data(title,text) VALUES("${newdata.title}","${newdata.text}")`)
+    connection.query(`INSERT INTO posts_data(title,text,user_name) VALUES("${newdata.title}","${newdata.text}","${req.session.username}")`)
 
   
     res.redirect("/home")
