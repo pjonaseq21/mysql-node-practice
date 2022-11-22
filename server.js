@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express()
+var fs = require('fs-extra')
 const mysql = require("mysql")
 const config = require("./db/database_test")
 let connection = mysql.createConnection(config);
@@ -11,6 +12,8 @@ let loginRouter = require("./routes/login")
 const helmet = require('helmet');
 const morgan = require('morgan');
 const session = require('express-session');
+const fileUpload = require('express-fileupload');
+
 /*
 let connection = mysql.createConnection(config);
 let testinsert = `INSERT INTO Sklep(id,name,region)
@@ -24,6 +27,7 @@ app.use(session({
 	saveUninitialized: true
 }));
 
+app.use(fileUpload());
 
 
 
@@ -31,6 +35,13 @@ app.use(session({
 app.set("view engine", 'ejs')
 
 app.use(express.urlencoded({ extended : false}))
+app.post("/upload",(req,res)=>{
+    let photo_name = req.body.foo
+    fs.move(photo_name, "/public")
+    connection.query(`UPDATE users_data set photo="${photo_name}" where login="${req.session.username}"`)
+    res.redirect("/home")
+    console.log(photo_name)
+})
 app.get("/home",(req,res)=>{
         if (req.session.loggedin){
             secondconnection.query("SELECT * FROM posts_data;",(err,result)=>{
