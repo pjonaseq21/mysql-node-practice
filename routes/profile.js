@@ -9,10 +9,14 @@ router.get("/profile/(:id)",(req,res)=>{
     let id = req.params.id
 
     connection.query('SELECT * FROM users_data WHERE id=?',[id], (err,result)=>{
-     
 
+    let string=JSON.stringify(result);
+    var json =  JSON.parse(string);
 
-    res.render("articles/profile.ejs",{data:result})
+   console.log(json)
+   
+
+    res.render("articles/profile.ejs",{data:json[0].photo})
 }
 )
 })

@@ -17,7 +17,7 @@
    <div class="container">
     <nav class="container p-1">
     <a href="logout" id="logout" class="nav btn btn-danger">Logout</a>
-    <a href="profile/<%= users %>"> <p  class="nav btn btn-dark" id="logout">Welcome <%= name %> </p></a>
+    <a href="profile/<%= users %>"> <p  class="nav btn btn-dark m-1" id="logout">Welcome <%= name %> <img id="avatar" src="/<%= photo %>" alt=""> </p></a>
     <a href="post"  id="logout" class="nav btn btn-success">Post</a>
 
     <h1 class="mb-4">Blog</h1>
@@ -39,6 +39,7 @@
             <p><%= entry.user_name %></p>
             <p id="title"><%= entry.title %></p>
             <p><%= entry.text %></p>
+            <img src="/<%=entry.user_photo%>" alt="">
         </div> 
 
               <% }) %>
@@ -54,6 +55,10 @@
 
 
 <style>
+    #avatar{
+        max-width: 50px;
+        max-height: 50px;
+    }
     #category-header{
         font-size: 2rem;
         text-decoration: none;

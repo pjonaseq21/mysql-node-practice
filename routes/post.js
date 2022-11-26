@@ -10,11 +10,12 @@ router.get("/post",(req,res)=>{
      res.render("articles/post.ejs")
 })
 router.post("/post",(req,res,err)=>{
+
     let newdata = {
         title : req.body.title,
         text : req.body.text
     }
-    connection.query(`INSERT INTO posts_data(title,text,user_name) VALUES("${newdata.title}","${newdata.text}","${req.session.username}")`)
+    connection.query(`INSERT INTO posts_data(title,text,user_name,user_photo) VALUES("${newdata.title}","${newdata.text}","${req.session.username}","${req.session.photo}")`)
 
   
     res.redirect("/home")

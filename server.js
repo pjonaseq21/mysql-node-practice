@@ -11,8 +11,10 @@ let secondconnection = mysql.createConnection(configsecond)
 let loginRouter = require("./routes/login")
 const helmet = require('helmet');
 const morgan = require('morgan');
+var multer = require('multer');
+
 const session = require('express-session');
-const fileUpload = require('express-fileupload');
+var upload = multer({dest : './images'}) 
 
 /*
 let connection = mysql.createConnection(config);
@@ -27,34 +29,50 @@ app.use(session({
 	saveUninitialized: true
 }));
 
-app.use(fileUpload());
 
 
 
 
 app.set("view engine", 'ejs')
+app.use(express.static(__dirname+'/images'));
 
 app.use(express.urlencoded({ extended : false}))
-app.post("/upload",(req,res)=>{
-    let photo_name = req.body.foo
-    fs.move(photo_name, "/public")
-    connection.query(`UPDATE users_data set photo="${photo_name}" where login="${req.session.username}"`)
-    res.redirect("/home")
-    console.log(photo_name)
-})
+app.post('/upload', upload.single("foo"), (req, res)=>
+{
+    fs.rename(req.file.path, `./images/${req.session.username}.jpg`, (err)=>{
+        console.log(err);
+        connection.query(`UPDATE users_data SET photo = '${req.session.username}.jpg' where login='${req.session.username}';`,(err,result)=>{
+            if(err){
+                console.log(err)
+            }
+            else{
+                console.log(result)
+            }
+        })
+    })
+    
+
+    return res.json("File Uploaded Successfully!");
+});
 app.get("/home",(req,res)=>{
         if (req.session.loggedin){
             secondconnection.query("SELECT * FROM posts_data;",(err,result)=>{
             if (err){
                console.log("DATABASE PROBLEM")
                throw err
-           }
-           console.log(req.session.UserId, 'this and that')
+            }
+            console.log(result)
+            connection.query('SELECT * FROM users_data WHERE login=?',[req.session.username], (err,photodb)=>{
+
+            let string=JSON.stringify(photodb);
+             var json =  JSON.parse(string);
+             let photo = json[0].photo
            secondconnection.query("SELECT * FROM categories",(err,callback)=>{
-          
            console.log(callback)
-           res.render("articles/logged.ejs",{data: result, name: req.session.username,users: req.session.UserId,test: callback});
-        }) }
+
+
+           res.render("articles/logged.ejs",{data: result, name: req.session.username,users: req.session.UserId,test: callback,photo: photo});
+        })}) }
     )}})
         
 app.get("/",(req,res) =>{

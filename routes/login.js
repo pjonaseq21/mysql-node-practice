@@ -19,9 +19,10 @@ router.post("/login",(req,res)=>{
       if(result.length > 0){
             req.session.loggedin = true;
             req.session.username = logindata.login;
-            for (id in result){
-                req.session.UserId = id
-            }
+            let string=JSON.stringify(result);
+            var json =  JSON.parse(string);
+            req.session.UserId = json[0].id
+            req.session.photo = json[0].photo
 
             console.log("User logged in")
             res.redirect("/home")

@@ -18,20 +18,22 @@
     
 <div id="container">
     <div class="text-center">
-        <% data.forEach(entry=>{ %>
-            <p><%= entry.login%></p>
-            <img src="<%= entry.photo%>"></img>
-            <form action="/upload" method="post">
+            <form action="/upload" method="post"  enctype="multipart/form-data">
                 <input name="foo" type="file" />
                 <input type='submit' value='Upload!' />
             </form>
-            <% }) %>
 
             <p></p>
+            <img src="/<%= data %>" alt="" id="avatar">
+
     </div>
 </div>
 
 <style>
+    #avatar{
+        width: 200px;
+        height: 200px;
+    }
     #test{
     display: flex;
     flex-direction: row;
