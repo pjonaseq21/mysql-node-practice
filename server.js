@@ -9,6 +9,7 @@ let postRouter = require("./routes/post")
 let profileRouter = require("./routes/profile")
 let secondconnection = mysql.createConnection(configsecond)
 let loginRouter = require("./routes/login")
+let registerRouter = require("./routes/register")
 const helmet = require('helmet');
 const morgan = require('morgan');
 var multer = require('multer');
@@ -96,5 +97,5 @@ app.use(helmet());
 app.use(morgan('combined'));
 
 
-app.use(loginRouter,postRouter,profileRouter)
+app.use(loginRouter,postRouter,profileRouter,registerRouter)
 app.listen(8000)

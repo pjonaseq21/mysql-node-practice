@@ -36,10 +36,14 @@
         
         <% data.forEach(entry=>{ %>
             <div id="container-post">
-            <p><%= entry.user_name %></p>
+            <div class="container-photo-name">
+             <div id="border-photo">
+            <img id="post-photo" src="/<%=entry.user_photo%>" alt="">
+            </div>   
+            <p class="h2"><%= entry.user_name %></p>
+        </div>
             <p id="title"><%= entry.title %></p>
             <p><%= entry.text %></p>
-            <img src="/<%=entry.user_photo%>" alt="">
         </div> 
 
               <% }) %>
@@ -55,6 +59,18 @@
 
 
 <style>
+    #border-photo{
+        border: 1px brown solid;
+        border-radius: 5px;
+    }
+    .container-photo-name{
+        display: flex;
+        align-items: center;
+    }
+    #post-photo{
+        max-width: 70px;
+        max-height: 50px;;
+    }
     #avatar{
         max-width: 50px;
         max-height: 50px;
